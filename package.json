@@ -1,7 +1,7 @@
 {
-  "name": "react-electron",
+  "name": "automatic-generator-menu",
   "version": "0.1.0",
-  "description": "Simple boilerplate for developing an Electron app with React",
+  "description": "Automatic generator of menu",
   "author": "willjw3",
   "build": {
     "appId": "gestionmenu.eg",
