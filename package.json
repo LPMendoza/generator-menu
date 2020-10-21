@@ -4,21 +4,30 @@
   "description": "Simple boilerplate for developing an Electron app with React",
   "author": "willjw3",
   "build": {
-    "appId": "react.electron",
+    "appId": "gestionmenu.eg",
+    "productName": "Gestión de menú",
     "win": {
-      "icon": "build/icon.png"
+      "icon": "build/logo.png"
     }
   },
   "main": "public/electron.js",
   "homepage": "./",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.5.3",
+    "bootstrap": "^4.5.3",
     "cross-env": "^6.0.3",
     "electron-is-dev": "^1.1.0",
+    "excel-report": "^0.3.4",
+    "excel4node": "^1.7.2",
+    "jquery": "^3.5.1",
+    "node-excel-export": "^1.4.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.2.0",
+    "react-toastify": "^6.0.9",
+    "xlsx-style": "^0.8.13"
   },
   "scripts": {
     "start-react": "react-scripts start",
@@ -26,8 +35,8 @@
     "test-react": "react-scripts test --env=jsdom",
     "eject-react": "react-scripts eject",
     "build-electron": "electron-builder",
-    "build": "yarn build-react && yarn build-electron",
-    "start": "concurrently \"cross-env BROWSER=none yarn start-react\" \"wait-on http://localhost:3000 && electron .\""
+    "build": "npm run build-react && npm run build-electron",
+    "start": "concurrently \"cross-env BROWSER=none npm run start-react\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,7 +55,7 @@
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
-    "electron": "^7.1.0",
+    "electron": "^9.1.0",
     "electron-builder": "^22.1.0",
     "wait-on": "^3.3.0"
   }
