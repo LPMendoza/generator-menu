@@ -2,12 +2,12 @@
   "name": "automatic-generator-menu",
   "version": "0.1.0",
   "description": "Automatic generator of menu",
-  "author": "willjw3",
+  "author": "Luis Pedro Mendoza Aceves",
   "build": {
     "appId": "gestionmenu.eg",
     "productName": "Gestión de menú",
     "win": {
-      "icon": "build/logo.png"
+      "icon": "build/logo-menu.png"
     }
   },
   "main": "public/electron.js",
@@ -27,6 +27,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.2.0",
     "react-toastify": "^6.0.9",
+    "sweetalert2": "^10.7.0",
     "xlsx-style": "^0.8.13"
   },
   "scripts": {

@@ -8,7 +8,7 @@ const FormFood = ({form, handleOnSubmit, handleOnInput, handleCancelEdition, isE
    }
 
    return(
-      <div className="contCard shadow-sm bg-white p-4 rounded formFood">
+      <div className="contCard shadow bg-white p-4 rounded formFood">
          <h3>Nuevo alimento</h3>
          <form className="mt-4">
             <div className="form-group">

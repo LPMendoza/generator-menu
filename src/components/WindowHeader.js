@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
-//import swal from 'sweetalert';
+import {
+    styleSwal
+} from '../conf/conf';
+import Swal from 'sweetalert2';
+
 var {remote} = window.require("electron");
 
 const WindowHeader = ({
@@ -12,9 +16,10 @@ const WindowHeader = ({
 }) => {
     
     let [maximize, setMaximize] = useState(true);
+    let currentWindow = remote.getCurrentWindow();
 
     const handleMaximize = (e) => {
-        let currentWindow = remote.getCurrentWindow();
+        currentWindow = remote.getCurrentWindow();
         if (maximize) {
             currentWindow.restore()
             setMaximize(false);
@@ -26,25 +31,33 @@ const WindowHeader = ({
     }
 
     const handleMinimize = (e) => {
-        let currentWindow = remote.getCurrentWindow();
+        currentWindow = remote.getCurrentWindow();
         currentWindow.minimize();
     }
 
     const handleClose = (e) => {
-      //   swal({
-      //       title: "Do you want to exit?",
-      //       text: "All you didn't save will lost",
-      //       buttons: ["No", "Yes"]
-      //   })
-      //   .then((accept) => {
-      //       if(accept) {
-      //           let currentWindow = remote.getCurrentWindow();
-      //           currentWindow.close();
-      //       }
-      //   });
-      let currentWindow = remote.getCurrentWindow();
-      currentWindow.close();
+      Swal.fire({
+              title: "¿Desea salir de la aplicación?",
+              body: "Todo lo que no haya guardado se perderá",
+              icon: "warning",
+              showCloseButton: true,
+              showCancelButton: true,
+              confirmButtonText: "Sí",
+              confirmButtonColor: styleSwal.confirmButtonColor,
+              cancelButtonText: "No",
+              cancelButtonColor: styleSwal.cancelButtonColor,
+          })
+          .then((result) => {
+              if (result.isConfirmed) {
+                currentWindow = remote.getCurrentWindow();
+                currentWindow.close();
+              }
+          });
     }
+
+    currentWindow.on("unmaximize", (e) => {
+        setMaximize(false);
+    });
 
     let classBackButton = "d-none";
     let classCloseButton = "d-none";
@@ -65,7 +78,7 @@ const WindowHeader = ({
     }
     const classMaximizeIcon = maximize === true ? "fas fa-compress-alt " : "fas fa-expand-alt ";
     return (
-        <div className={"container-window-header border-bottom " + classColor}>
+        <div className={"container-window-header " + classColor}>
             <div>
                 <span className={"window-title " + classColor}>Gestión de menú</span>
             </div>

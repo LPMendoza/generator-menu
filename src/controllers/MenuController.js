@@ -5,12 +5,26 @@ var xl = window.require('excel4node');
 class MenuController {
 
    constructor() {
-      this.pathFoods = path.join(window.__dirname, "/data/foods");
+      this.pathDir = path.join(__dirname, "/data");
+      this.pathFoods = path.join(__dirname, "/data/foods");
+   }
+
+   crearDirectorio () {
+      fs.mkdirSync(this.pathDir);
+      fs.writeFileSync(this.pathFoods, JSON.stringify([]));
    }
    
    getFoods() {
-      let menu = fs.readFileSync(this.pathFoods, "utf-8");
-      return JSON.parse(menu);
+      
+      try {
+         let menu = fs.readFileSync(this.pathFoods, "utf-8");
+         return JSON.parse(menu);
+      }
+      catch (error) {
+         //this.crearDirectorio();
+         return [];
+      }
+
    }
 
    addFood(foods) {

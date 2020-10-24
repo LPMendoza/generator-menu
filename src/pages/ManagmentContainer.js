@@ -7,10 +7,13 @@ import FoodTable from '../components/FoodTable';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { styleSwal } from "../conf/conf";
+import Swal from 'sweetalert2';
 
 
 const { remote } = window.require("electron");
 var dialog = remote.require('electron').dialog;
+
 
 class ManagmentContainer extends Component {
    constructor(props) {
@@ -87,13 +90,28 @@ class ManagmentContainer extends Component {
    }
 
    handleDelete = (index) => {
-      let food = this.state.food;
-      food.splice(index, 1);
-      this.menuCtrl.addFood(this.state.food);
-      this.setState({
-         food
+      Swal.fire({
+         title: "¿Desea eliminar el alimento?",
+         icon: "warning",
+         showCloseButton: true,
+         showCancelButton: true,
+         confirmButtonText: "Sí",
+         confirmButtonColor: styleSwal.confirmButtonColor,
+         cancelButtonText: "No",
+         cancelButtonColor: styleSwal.cancelButtonColor,
+      })
+      .then((result) => {
+         if(result.isConfirmed) {
+
+            let food = this.state.food;
+            food.splice(index, 1);
+            this.menuCtrl.addFood(this.state.food);
+            this.setState({
+               food
+            });
+            toast.success("✔ Comida eliminada!", { position: "top-left" });
+         }
       });
-      toast.success("✔ Comida eliminada!", {position: "top-left"});
    }
 
    handleEdit = (index) => {
@@ -221,7 +239,7 @@ class ManagmentContainer extends Component {
             {/* <NavBar /> */}
 
             <WindowHeader
-               classColor="bg-alter-light"
+               classColor=""
                closeButton={true}
                maximizeButton={true}
                minimizeButton={true}

@@ -4,13 +4,13 @@ const FoodTable = ({ foods, handleEdit, handleDelete, handleSearch}) => {
    
    return(
       <React.Fragment>
-         <div className="contCard contFood col-md-8 bg-white shadow-sm rounded p-0 pb-3">
+         <div className="contCard contFood col-md-8 bg-white shadow rounded p-0 pb-4">
             {/* <div className="m-3 txtSearch">
                <span className="fas fa-search"></span>
                <input onInput={handleSearch} type="text" name="" id="" className="custom-input ml-3" placeholder="Buscar..." />
             </div> */}
-            <h3 className="m-4">Alimentos</h3>
-            <div className="table-responsive pb-0 px-3">
+            <h3 className="m-4 pl-0">Alimentos</h3>
+            <div className="table-responsive pb-0 px-4">
                <table className="table tableFood table-bordered rounded tableMenu mb-0">
                   <thead>
                      <tr>
