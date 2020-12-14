@@ -69,13 +69,25 @@ class ManagmentContainer extends Component {
       e.preventDefault();
       let food = this.state.food;
       let message = "Comida agregada!";
+
       if (this.state.isEditing) {
          food.splice(this.state.indexEditing, 1, this.state.form);
          message = "Comida actualizada!";
       }
       else {
-         food.push(this.state.form);
+         let foodNames = this.state.form.name;
+
+         foodNames = foodNames.split("\n").filter(food => food != "");
+
+         foodNames.forEach(dish => {
+            food.push({
+               name: dish,
+               type: this.state.form.type
+            });
+         });
+         
       }  
+
       this.menuCtrl.addFood(this.state.food);
       this.setState({
          food,
@@ -86,7 +98,6 @@ class ManagmentContainer extends Component {
          isEditing: false,
          indexEditing: -1
       });
-      toast.success("✔ " + message, {position: "top-left"});
    }
 
    handleDelete = (index) => {
@@ -233,6 +244,34 @@ class ManagmentContainer extends Component {
 
    }
 
+   handleClear = (e) => {
+
+      Swal.fire({
+         title: "¿Desea limpiar el menú?",
+         text: "Todo los platillos serán quitados del menú",
+         icon: "warning",
+         showCloseButton: true,
+         showCancelButton: true,
+         confirmButtonText: "Sí",
+         confirmButtonColor: styleSwal.confirmButtonColor,
+         cancelButtonText: "No",
+         cancelButtonColor: styleSwal.cancelButtonColor,
+      })
+      .then((result) => {
+         if(result.isConfirmed) {
+
+
+            this.setState({
+               menu: {
+                  lunch: [],
+                  meal: [],
+                  refreshment: []
+               }
+            });
+         }
+      });
+   }
+
    render() {
       return(
          <div>
@@ -244,6 +283,8 @@ class ManagmentContainer extends Component {
                maximizeButton={true}
                minimizeButton={true}
             />
+            <div className="circleVectorLeft"></div>
+            <div className="circleVectorRight"></div>
             <div className="contMain">
                <div className="container px-4 py-5">
                   <div className="row justify-content-between">
@@ -253,6 +294,7 @@ class ManagmentContainer extends Component {
                         handleGenerateMenu={this.handleGenerateMenu}
                         handleOnChange={this.handleOnChange}
                         handleExcel={this.handleExcel}
+                        handleClear={this.handleClear}
                      />
                      <div className="col-md-4 col-12 pl-0 pr-0 pr-md-4 pb-4">
 

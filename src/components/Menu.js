@@ -17,11 +17,18 @@ class Menu extends React.Component{
       });
    }
 
+   isExportable = () => {
+      if(this.props.menu.lunch.length == 0 && this.props.menu.refreshment.length == 0 && this.props.menu.meal.length == 0) {
+         return false;
+      }
+      return true;
+   }
+
    componentDidUpdate= (e) => {
       this.resizeTextareas();
    }
    render = () => {
-      let {menu, handleGenerateMenu, handleOnChange, handleExcel} = this.props;
+      let {menu, handleGenerateMenu, handleOnChange, handleExcel, handleClear} = this.props;
       return (
          <React.Fragment>
             <div className="contCard contMenu col-md-12 mb-4 px-0 bg-white rounded shadow ">
@@ -68,7 +75,8 @@ class Menu extends React.Component{
                </div>
                <div className="pl-4 pb-4 pt-2 mt-0">
                   <button onClick={handleGenerateMenu} className="btn btn-secondary shadow-sm">Generar Menú <span className="fas fa-sync-alt ml-2"></span></button>
-                  <button onClick={handleExcel} className="btn btn-primary shadow-sm ml-2">Exportar a Excel <span className="fas fa-table ml-2"></span></button>
+                  <button onClick={handleExcel} className={`btn btn-primary shadow-sm ml-2 ${!this.isExportable() ? "disabled" : ""}`}>Exportar a Excel <span className="fas fa-table ml-2"></span></button>
+                  <button onClick={handleClear} className={`btn btn-danger shadow-sm ml-2 ${!this.isExportable() ? "disabled" : ""}`}>Limpiar<span className="fas fa-brush ml-2"></span></button>
                </div>
 
             </div>

@@ -168,7 +168,7 @@ class MenuController {
    async createExcel2(menu, pathExcel) {
       const styleSheet = {
          'sheetFormat': {
-         'defaultColWidth': 23.57,
+         'defaultColWidth': 20.00,
          'defaultRowHeight': 92.25,
          }
       }
@@ -223,7 +223,7 @@ class MenuController {
             name: "Arial Narrow",
             color: "#000000",
             bold: false,
-            size: 16,
+            size: 14,
             vertAlign: 'center'
          },
          alignment: { // §18.8.1
